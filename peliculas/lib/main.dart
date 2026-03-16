@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:peliculas/routers/rutaBaril.dart';
+import 'package:peliculas/screens/screens.dart';
 void main(){
   runApp(Myapp());
 }
@@ -11,7 +11,14 @@ class Myapp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // home: AppBarTheme(backgroundColor: A,),
-      home: HomeScreen(),
+      // home: HomeScreen(),
+      // detalle:DetailsScreen()
+      initialRoute: '/',
+      routes: {
+        '/':(context)=>HomeScreen(),
+        '/details':(context)=>DetailsScreen()
+      },
+      
 
       theme: ThemeData.light().copyWith(
         appBarTheme: 

@@ -10,7 +10,7 @@ class DetailsScreen extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Peliculas en cartelera'),
+        title: Text('Peliculas en cartelera')
       ),
     );
   }
