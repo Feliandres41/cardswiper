@@ -11,13 +11,13 @@ class MovieSlider extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 250,
-      color: Colors.amber,
+      
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(padding: EdgeInsets.all(10)),
+          Padding(padding: EdgeInsets.all(5)),
           // Padding(padding: ),
-          Text('peliculas de tijeras', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600 ),),
+          Text("peliculas", style: TextStyle(fontSize: 20),textAlign: TextAlign.center,),
           Expanded(child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: 10,
@@ -36,11 +36,22 @@ class _MovieS extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 130,
-      height: 190,
-      color: Colors.deepOrange,
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    return  Container(
+        width: 130,
+        height: 190,
+        
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: Column(
+          children: [GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/details', arguments: 'the movie');
+            },
+            child:FadeInImage(placeholder: AssetImage('assets/gato.png'), image:NetworkImage("https://picsum.photos/200/250")),
+          ),
+           
+          Text("Pelicula arruruu"),
+          ],
+        ),
     );
   }
 }
