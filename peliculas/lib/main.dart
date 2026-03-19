@@ -20,7 +20,7 @@ class Myapp extends StatelessWidget{
       },
       
 
-      theme: ThemeData.light().copyWith(
+      theme: ThemeData.dark().copyWith(
         appBarTheme: 
           AppBarTheme(
             backgroundColor: Colors.red,

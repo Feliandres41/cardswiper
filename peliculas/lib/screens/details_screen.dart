@@ -26,27 +26,71 @@ class _PosterMovie extends StatelessWidget{
     return Container(
       margin: EdgeInsets.only(top: 20),
       padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
+      child: Column(
         children: [
-          FadeInImage(
-            placeholder: AssetImage('assets/gato.png'), 
-            image: NetworkImage('https://picsum.photos/200/250'),
-            height: 150,
-            ),
-            Column(
-              children: [
-                Padding(padding: EdgeInsetsGeometry.only(left: 170)),
-                Text('movie title',style: TextStyle(fontSize: 20),),
-                Text('title original'),
-                Row(
+          Row(
+            spacing: 10,
+            children: [
+              FadeInImage(
+                placeholder: AssetImage('assets/gato.png'), 
+                image: NetworkImage('https://picsum.photos/200/250'),
+                height: 150,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.star,color: Colors.yellow,),
-                    Text('puntuacion')
+                   
+                    Text('movie title',style: TextStyle(fontSize: 20),),
+                    Text('title original'),
+                    Row(
+                      children: [
+                        Icon(Icons.star,color: Colors.yellow,),
+                        Text('puntuacion')
+                      ],
+                    ),
+                    
+                    
+                  ],
+                )
+            ],
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Text('SIPNOSIS (ME COPIE DE CARLOS)', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+          SizedBox(
+            height: 10,
+          ),
+          Text('Terminator 2: El juicio final (1991) sigue a un cyborg T-800 enviado desde el futuro para proteger a un adolescente John Connor y a su madre, Sarah, de un T-1000, una máquina de metal líquido más avanzada enviada para asesinar al futuro líder de la resistencia humana y asegurar la victoria de las máquinas. ', textAlign: TextAlign.justify,),
+
+          SizedBox(
+            width: double.infinity,
+            height: 200,
+            child: ListView.builder(itemBuilder: (context, index) {
+              return Container(
+                width: 112,
+                height: 200,
+                margin: EdgeInsets.all(20),
+                
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadiusGeometry.circular(20),
+                      child: FadeInImage(placeholder: AssetImage('assets/gato.png'), image: NetworkImage('https://picsum.photos/200/250'),
+                      fit: BoxFit.cover,
+                      
+                      ),
+                    ),
+                    Text('Maria el Bros')
                   ],
                 ),
-                
-              ],
-            )
+              );
+            } , itemCount: 4,
+            scrollDirection: Axis.horizontal,
+            ),
+          )
+          
+            
         ],
       ),
     );
