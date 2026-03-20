@@ -1,6 +1,8 @@
 
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:peliculas/providers/movies_providers.dart';
+import 'package:provider/provider.dart';
 
 
 class Cardswiper extends StatelessWidget{
@@ -8,7 +10,7 @@ class Cardswiper extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-
+    final peliculas = Provider.of<MoviesProviders>(context);
     final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
@@ -22,7 +24,7 @@ class Cardswiper extends StatelessWidget{
         child: Swiper(
         pagination: SwiperPagination(margin: EdgeInsetsGeometry.all(1),),
         autoplay: true,
-        itemCount: 10,
+        itemCount: peliculas.movie.length,
         layout: SwiperLayout.DEFAULT,
         itemWidth: size.width*0.6,
         itemHeight: size.height*0.9,
@@ -30,8 +32,8 @@ class Cardswiper extends StatelessWidget{
         itemBuilder: (_, int index) {
           return FadeInImage(
             placeholder: AssetImage('assets/gato.png'), 
-            image: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVn4YX66yXDWR1i5XCu1ZGrJh0M-pzgdjYyA&s'),
-            fit: BoxFit.cover,
+            image: NetworkImage('https://image.tmdb.org/t/p/w400${peliculas.movie['results'][index]['poster_path']}'),
+            fit: BoxFit.contain,
             );
         },)
          

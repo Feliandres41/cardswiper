@@ -1,29 +1,43 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 class DetailsScreen extends StatelessWidget{
-
-  const DetailsScreen({super.key});
+  Map peliX ={};
+  DetailsScreen({
+    super.key,
+    required this.peliX
+    });
 
   @override
   Widget build(BuildContext context) {
-      final String titleMovie = ModalRoute.of(context)?.settings.arguments as String ?? 'no-movie';
+      // final String titleMovie = ModalRoute.of(context)?.settings.arguments as String ?? 'no-movie';
     return Scaffold(
       
       body: 
           CustomScrollView(
             slivers: [
-              _CustomAppBar(titleMovie: titleMovie,),
-              SliverList(delegate: SliverChildListDelegate([_PosterMovie()]))
+              // _CustomAppBar(titleMovie: titleMovie,),
+              _CustomAppBar(peli: peliX),
+              SliverList(delegate: SliverChildListDelegate([_PosterMovie(peli: peliX,)]))
             ],
           )
     );
   }
 }
 
+
+
+// ignore: must_be_immutable
 class _PosterMovie extends StatelessWidget{
+  Map peli={};
+  _PosterMovie({
+    required this.peli
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       margin: EdgeInsets.only(top: 20),
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -33,36 +47,49 @@ class _PosterMovie extends StatelessWidget{
             children: [
               FadeInImage(
                 placeholder: AssetImage('assets/gato.png'), 
-                image: NetworkImage('https://picsum.photos/200/250'),
-                height: 150,
+                image: NetworkImage('https://image.tmdb.org/t/p/w500${peli['backdrop_path']}'),
+                // height: 10,
+                width: 200,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                   
-                    Text('movie title',style: TextStyle(fontSize: 20),),
-                    Text('title original'),
-                    Row(
-                      children: [
-                        Icon(Icons.star,color: Colors.yellow,),
-                        Text('puntuacion')
-                      ],
-                    ),
-                    
-                    
-                  ],
+                SizedBox(
+                  // width: 10,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                     
+                      Text('${peli['title']}',style: TextTheme.of(context).bodyMedium, 
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 5,),
+                      Text('${peli['original_title']}'),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.star,color: Colors.yellow,),
+                          Text('${peli['vote_average']}')
+                        ],
+                      ),
+                      
+                      
+                    ],
+                  ),
                 )
             ],
           ),
           SizedBox(
             height: 30,
           ),
-          Text('SIPNOSIS (ME COPIE DE CARLOS)', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+          Text('SIPNOSIS', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
           SizedBox(
             height: 10,
           ),
-          Text('Terminator 2: El juicio final (1991) sigue a un cyborg T-800 enviado desde el futuro para proteger a un adolescente John Connor y a su madre, Sarah, de un T-1000, una máquina de metal líquido más avanzada enviada para asesinar al futuro líder de la resistencia humana y asegurar la victoria de las máquinas. ', textAlign: TextAlign.justify,),
-
+          // Text('Terminator 2: El juicio final (1991) sigue a un cyborg T-800 enviado desde el futuro para proteger a un adolescente John Connor y a su madre, Sarah, de un T-1000, una máquina de metal líquido más avanzada enviada para asesinar al futuro líder de la resistencia humana y asegurar la victoria de las máquinas. ', textAlign: TextAlign.justify,),
+          Text('${peli['overview']}'),
           SizedBox(
             width: double.infinity,
             height: 200,
@@ -100,8 +127,9 @@ class _PosterMovie extends StatelessWidget{
 
 
 class _CustomAppBar extends StatelessWidget{
-  final String titleMovie;
-  const _CustomAppBar ({required this.titleMovie});
+  // final String titleMovie;
+  Map peli ={};
+  _CustomAppBar ({required this.peli});
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -116,7 +144,7 @@ class _CustomAppBar extends StatelessWidget{
           alignment: Alignment.bottomCenter,
           color: Colors.black26,
           child: Text(
-            titleMovie,
+            peli['title'],
             style: TextStyle(
               fontSize: 18,
               color: Colors.white
@@ -125,7 +153,7 @@ class _CustomAppBar extends StatelessWidget{
         ),
         background: FadeInImage(
           placeholder: AssetImage('assets/icono.png'), 
-          image: NetworkImage('https://picsum.photos/200/250'),
+          image: NetworkImage('https://image.tmdb.org/t/p/w500${peli['backdrop_path']}'),
           fit: BoxFit.cover,
         ),
         

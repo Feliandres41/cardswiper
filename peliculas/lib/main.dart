@@ -1,11 +1,31 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:peliculas/helpers/search.dart';
+import 'package:peliculas/providers/movies_providers.dart';
+import 'package:peliculas/screens/ejemplo.dart';
 import 'package:peliculas/screens/screens.dart';
-void main(){
-  runApp(Myapp());
+import 'package:provider/provider.dart';
+void main()=>
+  runApp(AppState());
+
+
+class AppState extends StatelessWidget{
+  const AppState({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(providers: [ChangeNotifierProvider(create: (_)=> MoviesProviders())] 
+    ,child: Myapp(),
+    );
+  }
 }
+
 class Myapp extends StatelessWidget{
+  const Myapp({super.key});
+
+  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,11 +36,12 @@ class Myapp extends StatelessWidget{
       initialRoute: '/',
       routes: {
         '/':(context)=>HomeScreen(),
-        '/details':(context)=>DetailsScreen()
+        '/search':(context)=>Search()
+        // '/details':(context)=>DetailsScreen(peliX: {},)
       },
       
 
-      theme: ThemeData.dark().copyWith(
+      theme: ThemeData.light().copyWith(
         appBarTheme: 
           AppBarTheme(
             backgroundColor: Colors.red,
