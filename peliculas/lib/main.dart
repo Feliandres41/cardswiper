@@ -46,6 +46,13 @@ class Myapp extends StatelessWidget{
           AppBarTheme(
             backgroundColor: Colors.red,
           ),
+          iconTheme: IconThemeData(
+            color: Colors.white
+          ), 
+          iconButtonTheme: IconButtonThemeData(
+            style:ButtonStyle(iconColor: WidgetStatePropertyAll(Colors.white))
+          )
+        
       )
     );
   }

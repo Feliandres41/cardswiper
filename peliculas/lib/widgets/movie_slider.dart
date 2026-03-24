@@ -14,6 +14,7 @@ class MovieSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final peliculas = Provider.of<MoviesProviders>(context);
+    // peliculas
     return Container(
       width: double.infinity,
       height: 250,

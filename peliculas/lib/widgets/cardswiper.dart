@@ -2,6 +2,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:peliculas/providers/movies_providers.dart';
+import 'package:peliculas/screens/details_screen.dart';
 import 'package:provider/provider.dart';
 
 
@@ -12,11 +13,13 @@ class Cardswiper extends StatelessWidget{
   Widget build(BuildContext context) {
     final peliculas = Provider.of<MoviesProviders>(context);
     final size = MediaQuery.of(context).size;
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/details');
-      },
-      child: SizedBox(
+    return 
+    // GestureDetector(
+    //   onTap: () {
+    //     Navigator.pushNamed(context, '/details');
+    //   },
+    //   child: 
+      SizedBox(
       
         width: double.infinity,
         height: size.height*0.3,
@@ -30,14 +33,22 @@ class Cardswiper extends StatelessWidget{
         itemHeight: size.height*0.9,
         
         itemBuilder: (_, int index) {
-          return FadeInImage(
-            placeholder: AssetImage('assets/gato.png'), 
-            image: NetworkImage('https://image.tmdb.org/t/p/w400${peliculas.movie['results'][index]['poster_path']}'),
-            fit: BoxFit.contain,
-            );
-        },)
+          return GestureDetector(
+            onTap: () {
+              Map detalles = peliculas.movie['results'][index];
+              Navigator.push(context, 
+              MaterialPageRoute(builder: (context) => DetailsScreen(peliX: detalles),));
+            },
+            child: FadeInImage(
+              placeholder: AssetImage('assets/gato.png'), 
+              image: NetworkImage('https://image.tmdb.org/t/p/w400${peliculas.movie['results'][index]['poster_path']}'),
+              fit: BoxFit.contain,
+              ),
+          );
+        },
+      //   )
          
-      ),
-    );
+      // ),
+        ));
   }
 }
